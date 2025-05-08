@@ -8,4 +8,4 @@ value = "3.12.10"
 
 [[build.env]]
 name = "GOOGLE_ENTRYPOINT"
-value = "gunicorn config.wsgi:application --bind \"0.0.0.0:$PORT\""
+value = "django-admin startproject config . && gunicorn config.wsgi:application --bind \"0.0.0.0:$PORT\""

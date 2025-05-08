@@ -29,18 +29,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.12'
-
-    - name: Install Django
-      run: pip install django
-
-    - name: Create Django project
-      run: |
-        django-admin startproject mysite ${{ env.BASE_DIR }}
-
     - name: Setup Pack CLI
       uses: buildpacks/github-actions/setup-pack@v5.0.0
 
@@ -48,7 +36,7 @@ jobs:
       run: |
         pack build ${{ env.DOCKER_HUB_REPO }}:${{ env.DOCKER_HUB_IMAGE_TAG }} \
           --path ${{ env.BASE_DIR }} \
-          --env "DISABLE_COLLECTSTATIC=${{ env.DISABLE_COLLECTSTATIC }}" \
+          --env "DISABLE_COLLECTSTATIC=1" \
           --builder ${{ env.BUILDPACK_BUILDER }}
 
     - name: Login to Docker Hub
